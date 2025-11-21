@@ -4143,7 +4143,7 @@ static int ethtool_drvinfo(unsigned char *ptr, size_t size, struct net_device *d
 		ops->get_drvinfo(dev, &info);
 #if LINUX_VERSION_CODE >= KERNEL_VERSION(2,6,37)
 	else if (dev->dev.parent && dev->dev.parent->driver) {
-#if LINUX_VERSION_CODE <= KERNEL_VERSION(6,8,0)
+#if LINUX_VERSION_CODE < KERNEL_VERSION(6,8,0)
 		strlcpy(info.driver, dev->dev.parent->driver->name, sizeof(info.driver));
 #else
 		strscpy(info.driver, dev->dev.parent->driver->name, sizeof(info.driver));
@@ -5748,7 +5748,7 @@ static int __init ipt_netflow_init(void)
 	if (!destination)
 		destination = destination_buf;
 	if (destination != destination_buf) {
-#if LINUX_VERSION_CODE <= KERNEL_VERSION(6,8,0)
+#if LINUX_VERSION_CODE < KERNEL_VERSION(6,8,0)
 		strlcpy(destination_buf, destination, sizeof(destination_buf));
 #else
 		strscpy(destination_buf, destination, sizeof(destination_buf));
@@ -5762,7 +5762,7 @@ static int __init ipt_netflow_init(void)
 	if (!aggregation)
 		aggregation = aggregation_buf;
 	if (aggregation != aggregation_buf) {
-#if LINUX_VERSION_CODE <= KERNEL_VERSION(6,8,0)
+#if LINUX_VERSION_CODE < KERNEL_VERSION(6,8,0)
 		strlcpy(aggregation_buf, aggregation, sizeof(aggregation_buf));
 #else
 		strscpy(aggregation_buf, aggregation, sizeof(aggregation_buf));
@@ -5776,7 +5776,7 @@ static int __init ipt_netflow_init(void)
 	if (!sampler)
 		sampler = sampler_buf;
 	if (sampler != sampler_buf) {
-#if LINUX_VERSION_CODE <= KERNEL_VERSION(6,8,0)
+#if LINUX_VERSION_CODE < KERNEL_VERSION(6,8,0)
 		strlcpy(sampler_buf, sampler, sizeof(sampler_buf));
 #else
 		strscpy(sampler_buf, sampler, sizeof(sampler_buf));
@@ -5797,7 +5797,7 @@ static int __init ipt_netflow_init(void)
 	if (!snmp_rules)
 		snmp_rules = snmp_rules_buf;
 	if (snmp_rules != snmp_rules_buf) {
-#if LINUX_VERSION_CODE <= KERNEL_VERSION(6,8,0)
+#if LINUX_VERSION_CODE < KERNEL_VERSION(6,8,0)
 		strlcpy(snmp_rules_buf, snmp_rules, sizeof(snmp_rules_buf));
 #else
 		strscpy(snmp_rules_buf, snmp_rules, sizeof(snmp_rules_buf));
