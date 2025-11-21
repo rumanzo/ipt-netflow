@@ -36,7 +36,6 @@ kbuild_test_compile() {
     echo
   else
     echo " undeclared" >&2
-    echo "#undef HAVE_$1"
     echo "// ${2:-symbol} is undeclared${3:+ in <$3>}. Compile:"
     sed  "s/^/\/\/   /" test.c
     echo "// Output:"
@@ -122,6 +121,7 @@ kbuild_test_symbol nf_bridge_info_get linux/netfilter_bridge.h
 kbuild_test_struct vlan_dev_priv linux/if_vlan.h
 # Kernel version check broken by centos8
 kbuild_test_symbol put_unaligned_be24 asm/unaligned.h
+kbuild_test_symbol put_unaligned_be24 linux/unaligned.h
 # totalram_pages changed from atomic to inline function.
 kbuild_test_symbol totalram_pages linux/mm.h
 kbuild_test_ref    totalram_pages linux/mm.h
