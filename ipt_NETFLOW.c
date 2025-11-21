@@ -1523,8 +1523,13 @@ unlock:
 
 #ifdef CONFIG_SYSCTL
 /* sysctl /proc/sys/net/netflow */
+#ifdef HAVE_REGISTER_SYSCTL_PATHS
+static int hsize_procctl(ctl_table *ctl, int write, BEFORE2632(struct file *filp,)
+			 void __user *buffer, size_t *lenp, loff_t *fpos)
+#else
 static int hsize_procctl(const ctl_table *ctl, int write, BEFORE2632(struct file *filp,)
 			 void __user *buffer, size_t *lenp, loff_t *fpos)
+#endif
 {
 	int ret, hsize;
 	ctl_table_no_const lctl = *ctl;
@@ -1540,8 +1545,13 @@ static int hsize_procctl(const ctl_table *ctl, int write, BEFORE2632(struct file
 		return ret;
 }
 
+# ifdef HAVE_REGISTER_SYSCTL_PATHS
+static int sndbuf_procctl(ctl_table *ctl, int write, BEFORE2632(struct file *filp,)
+			 void __user *buffer, size_t *lenp, loff_t *fpos)
+#else
 static int sndbuf_procctl(const ctl_table *ctl, int write, BEFORE2632(struct file *filp,)
 			 void __user *buffer, size_t *lenp, loff_t *fpos)
+#endif
 {
 	int ret;
 	struct ipt_netflow_sock *usock;
@@ -1575,8 +1585,13 @@ static int sndbuf_procctl(const ctl_table *ctl, int write, BEFORE2632(struct fil
 }
 
 static void free_templates(void);
+# ifdef HAVE_REGISTER_SYSCTL_PATHS
+static int destination_procctl(ctl_table *ctl, int write, BEFORE2632(struct file *filp,)
+			 void __user *buffer, size_t *lenp, loff_t *fpos)
+#else
 static int destination_procctl(const ctl_table *ctl, int write, BEFORE2632(struct file *filp,)
 			 void __user *buffer, size_t *lenp, loff_t *fpos)
+#endif
 {
 	int ret;
 
@@ -1592,8 +1607,13 @@ static int destination_procctl(const ctl_table *ctl, int write, BEFORE2632(struc
 }
 
 #ifdef ENABLE_AGGR
+# ifdef HAVE_REGISTER_SYSCTL_PATHS
+static int aggregation_procctl(ctl_table *ctl, int write, BEFORE2632(struct file *filp,)
+			 void __user *buffer, size_t *lenp, loff_t *fpos)
+#else
 static int aggregation_procctl(const ctl_table *ctl, int write, BEFORE2632(struct file *filp,)
 			 void __user *buffer, size_t *lenp, loff_t *fpos)
+#endif
 {
 	int ret;
 
@@ -1607,8 +1627,13 @@ static int aggregation_procctl(const ctl_table *ctl, int write, BEFORE2632(struc
 #endif
 
 #ifdef ENABLE_PROMISC
+#ifdef HAVE_REGISTER_SYSCTL_PATHS
+static int promisc_procctl(ctl_table *ctl, int write, BEFORE2632(struct file *filp,)
+			 void __user *buffer, size_t *lenp, loff_t *fpos)
+#else
 static int promisc_procctl(const ctl_table *ctl, int write, BEFORE2632(struct file *filp,)
 			 void __user *buffer, size_t *lenp, loff_t *fpos)
+#endif
 {
 	int newpromisc = promisc;
 	int ret;
@@ -1624,8 +1649,13 @@ static int promisc_procctl(const ctl_table *ctl, int write, BEFORE2632(struct fi
 
 #ifdef ENABLE_SAMPLER
 static int parse_sampler(char *ptr);
+#ifdef HAVE_REGISTER_SYSCTL_PATHS
+static int sampler_procctl(ctl_table *ctl, int write, BEFORE2632(struct file *filp,)
+			 void __user *buffer, size_t *lenp, loff_t *fpos)
+#else
 static int sampler_procctl(const ctl_table *ctl, int write, BEFORE2632(struct file *filp,)
 			 void __user *buffer, size_t *lenp, loff_t *fpos)
+#endif
 {
 	int ret;
 
@@ -1657,8 +1687,13 @@ static int sampler_procctl(const ctl_table *ctl, int write, BEFORE2632(struct fi
 
 #ifdef SNMP_RULES
 static int add_snmp_rules(char *ptr);
+#ifdef HAVE_REGISTER_SYSCTL_PATHS
+static int snmp_procctl(ctl_table *ctl, int write, BEFORE2632(struct file *filp,)
+			 void __user *buffer, size_t *lenp, loff_t *fpos)
+#else
 static int snmp_procctl(const ctl_table *ctl, int write, BEFORE2632(struct file *filp,)
 			 void __user *buffer, size_t *lenp, loff_t *fpos)
+#endif
 {
        int ret;
 
@@ -1682,8 +1717,13 @@ static void clear_ipt_netflow_stat(void)
 	}
 }
 
+#ifdef HAVE_REGISTER_SYSCTL_PATHS
+static int flush_procctl(ctl_table *ctl, int write, BEFORE2632(struct file *filp,)
+			 void __user *buffer, size_t *lenp, loff_t *fpos)
+#else
 static int flush_procctl(const ctl_table *ctl, int write, BEFORE2632(struct file *filp,)
 			 void __user *buffer, size_t *lenp, loff_t *fpos)
+#endif
 {
 	int ret;
 	int val = 0;
@@ -1711,8 +1751,13 @@ static int flush_procctl(const ctl_table *ctl, int write, BEFORE2632(struct file
 	return ret;
 }
 
+#ifdef HAVE_REGISTER_SYSCTL_PATHS
+static int protocol_procctl(ctl_table *ctl, int write, BEFORE2632(struct file *filp,)
+			 void __user *buffer, size_t *lenp, loff_t *fpos)
+#else
 static int protocol_procctl(const ctl_table *ctl, int write, BEFORE2632(struct file *filp,)
 			 void __user *buffer, size_t *lenp, loff_t *fpos)
+#endif
 {
 	int ret;
 	int ver = protocol;
@@ -1744,8 +1789,13 @@ static int protocol_procctl(const ctl_table *ctl, int write, BEFORE2632(struct f
 #ifdef CONFIG_NF_NAT_NEEDED
 static void register_ct_events(void);
 static void unregister_ct_events(void);
+#ifdef HAVE_REGISTER_SYSCTL_PATHS
+static int natevents_procctl(ctl_table *ctl, int write, BEFORE2632(struct file *filp,)
+			 void __user *buffer, size_t *lenp, loff_t *fpos)
+#else
 static int natevents_procctl(const ctl_table *ctl, int write, BEFORE2632(struct file *filp,)
 			 void __user *buffer, size_t *lenp, loff_t *fpos)
+#endif
 {
 	int ret;
 	int val = natevents;
